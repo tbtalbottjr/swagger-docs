@@ -143,8 +143,12 @@ module Swagger
         end
 
         def path_route_nickname(path, route)
-          action = route.defaults[:action]
-          "#{path.camelize}##{action}"
+          unless route.name.blank?
+            route.name
+          else
+            action = route.defaults[:action]
+            "#{path.camelize}##{action}"
+          end
         end
 
         def nickname_defined?(defined_nicknames, path, route)
