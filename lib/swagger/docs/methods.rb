@@ -17,9 +17,10 @@ module Swagger
           swagger_dsl = {}
           Array(@swagger_dsl).each do |action, params, controller, block|
             dsl = SwaggerDSL.call(action, controller, &block)
-            swagger_dsl[action] ||= {}
-            swagger_dsl[action].deep_merge!(dsl) { |key, old, new| Array(old) + Array(new) }
-            swagger_dsl[action].deep_merge!(params) # merge in user api parameters
+            action_key = (params[:nickname].nil? ? action : "#{params[:nickname]}_#{action}")
+            swagger_dsl[action_key] ||= {}
+            swagger_dsl[action_key].deep_merge!(dsl) { |key, old, new| Array(old) + Array(new) }
+            swagger_dsl[action_key].deep_merge!(params) # merge in user api parameters
           end
           swagger_dsl
         end
