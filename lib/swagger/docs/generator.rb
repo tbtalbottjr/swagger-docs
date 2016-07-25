@@ -186,7 +186,6 @@ module Swagger
         end
 
         def get_route_path_apis(path, route, klass, settings, config)
-          Rails.logger.debug ">>>> get_route_path_apis path: #{path.inspect}, route: #{route.inspect}, settings: #{settings.inspect}, config: #{config.inspect}}"
           models, apis = {}, []
           action = route.defaults[:action]
           verbs = route_verbs(route)
@@ -194,7 +193,6 @@ module Swagger
           return {apis: apis, models: models, nickname: nil} if !operation = klass.swagger_actions["#{nickname}_#{action}"] || klass.swagger_actions[action.to_sym]
           operation = Hash[operation.map {|k, v| [k.to_s.gsub("@","").to_sym, v.respond_to?(:deep_dup) ? v.deep_dup : v.dup] }] # rename :@instance hash keys
           operation[:nickname] = nickname
-          Rails.logger.debug ">>>> get_route_path_apis operation: #{operation.inspect}, nickname: #{nickname.inspect}"
 
           route_path = if defined?(route.path.spec) then route.path.spec else route.path end
           api_path = transform_spec_to_api_path(route_path, settings[:controller_base_path], config[:api_extension_type])
