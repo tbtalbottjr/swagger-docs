@@ -18,14 +18,14 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.cert_chain  = ['certs/gem-public_cert.pem']
-  spec.signing_key = File.expand_path("~/.gemcert/gem-private_key.pem") if $0 =~ /gem\z/
+  #spec.cert_chain  = ['certs/gem-public_cert.pem']
+  #spec.signing_key = File.expand_path("~/.gemcert/gem-private_key.pem") if $0 =~ /gem\z/
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake", "~> 10"
   spec.add_development_dependency "rspec", "~> 3"
   spec.add_development_dependency "appraisal", "~> 1"
 
-  spec.add_runtime_dependency "rails", ">= 3","< 5"
-  spec.add_runtime_dependency "activesupport", ">= 3","< 5"
+  spec.add_runtime_dependency "rails", ">= 3"
+  spec.add_runtime_dependency "activesupport", ">= 3"
 end
